@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+# Exit on error and undefined variables
+set -euo pipefail
+
+# === Default Values ===
+DEFAULT_PROJECT="network-bootcamp"
+DEFAULT_REGION="ca-central-1"
+
+# === Usage Help ===
+usage() {
+  echo "Usage: $0 [--project <name>] [--region <aws-region>]"
+  echo ""
+  echo "Options:"
+  echo "  --project    Project name (default: $DEFAULT_PROJECT)"
+  echo "  --region     AWS region (default: $DEFAULT_REGION)"
+  exit 1
+}
+
+# === Parse Command Line Args ===
+PROJECT="$DEFAULT_PROJECT"
+REGION="$DEFAULT_REGION"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --project)
+      PROJECT="$2"
+      shift 2
+      ;;
+    --region)
+      REGION="$2"
+      shift 2
+      ;;
+    -*|--*)
+      usage
+      ;;
+  esac
+done
+
+# === Derived Variables ===
+STACK_NAME="${PROJECT}-vpc"
+TEMPLATE_FILE="template.yaml"
+AZ="${REGION}a"
+
+# === Parameter Overrides ===
+PARAMS=(
+  VpcCidr=10.200.123.0/24
+  VpcName=${PROJECT}-vpc
+  AvailabilityZone=${AZ}
+  PublicSubnetCidr=10.200.123.0/28
+  PublicSubnetName=${PROJECT}-subnet-public1-${AZ}
+  PublicRouteTableName=${PROJECT}-rtb-public
+  PrivateSubnetCidr=10.200.123.128/28
+  PrivateSubnetName=${PROJECT}-subnet-private1-${AZ}
+  PrivateRouteTableName=${PROJECT}-rtb-private-${AZ}
+  InternetGatewayName=${PROJECT}-igw
+)
+
+# === Check Stack Existence ===
+# Ref: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/describe-stacks.html
+if aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" >/dev/null 2>&1; then
+  IS_UPDATE=true
+else
+  IS_UPDATE=false
+fi
+
+# === Deploy Stack ===
+echo "🚀 Deploying CloudFormation stack: $STACK_NAME in $REGION"
+
+# Ref: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/deploy.html
+aws cloudformation deploy \
+  --stack-name "$STACK_NAME" \
+  --template-file "$TEMPLATE_FILE" \
+  --region "$REGION" \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides "${PARAMS[@]}"
+
+# === Wait for Completion ===
+echo -e "\n⏳ Waiting for stack operation to complete..."
+
+# Ref: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/wait/stack-update-complete.html
+if [ "$IS_UPDATE" = true ]; then
+  aws cloudformation wait stack-update-complete \
+    --stack-name "$STACK_NAME" \
+    --region "$REGION"
+else
+  aws cloudformation wait stack-create-complete \
+    --stack-name "$STACK_NAME" \
+    --region "$REGION"
+fi
+
+# === Output Stack Info ===
+echo -e "\n📦 Stack Outputs:"
+aws cloudformation describe-stacks \
+  --stack-name "$STACK_NAME" \
+  --region "$REGION" \
+  --query "Stacks[0].Outputs" \
+  --output table
+
+#eof#
