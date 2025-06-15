@@ -1,4 +1,4 @@
-# Journal
+# Environment Automation Journal
 
 ## AWS VPC Automation
 
@@ -37,9 +37,9 @@ These settings were then provided to [_ChatGPT_](https://chatgpt.com/) to create
 > 
 > A prompt was created along the lines of: 
 >> _Please create an AWS CloudFormation template to setup a VPC using the following configuration:_
->> _<<pasted_config>>_
+>> _\<pasted_config\>_
 >
-> Where the `<<pasted_config>>` are the VPC configuration values. Once the template was generated, _ChatGPT_ was prompted to refactor it so that the template is parameterized, which is considered a good practice:
+> Where the `<pasted_config>` are the VPC configuration values. Once the template was generated, _ChatGPT_ was prompted to refactor it so that the template is parameterized, which is considered a good practice:
 >> _Please refactor the template to use parameters._
 >
 > The resulting template was then reviewed for quality control and to ensure it incorporated all of our configuration.
