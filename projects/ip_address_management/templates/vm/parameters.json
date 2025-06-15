@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "canadacentral"
+    },
+    "virtualMachineName": {
+      "value": "network-bootcamp-windows-server"
+    },
+    "virtualMachineComputerName": {
+      "value": "network-bootcam"
+    },
+    "adminUsername": {
+      "value": "adminuser"
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "vmSize": {
+      "value": "Standard_B2als_v2"
+    },
+    "addressPrefix": {
+      "value": "10.0.0.0/16"
+    },
+    "subnetPrefix": {
+      "value": "10.0.0.0/24"
+    },
+    "subnetName": {
+      "value": "default"
+    },
+    "nsgName": {
+      "value": "network-bootcamp-windows-server-nsg"
+    },
+    "publicIpName": {
+      "value": "network-bootcamp-windows-server-ip"
+    },
+    "publicIpAllocationMethod": {
+      "value": "Static"
+    },
+    "publicIpSku": {
+      "value": "Standard"
+    },
+    "nicName": {
+      "value": "network-bootcamp-windows-server-nic"
+    },
+    "osDiskStorageType": {
+      "value": "Premium_LRS"
+    },
+    "osDiskSizeGiB": {
+      "value": 128
+    },
+    "imagePublisher": {
+      "value": "MicrosoftWindowsServer"
+    },
+    "imageOffer": {
+      "value": "WindowsServer"
+    },
+    "imageSku": {
+      "value": "2025-Datacenter-G2"
+    },
+    "imageVersion": {
+      "value": "latest"
+    }
+  }
+}

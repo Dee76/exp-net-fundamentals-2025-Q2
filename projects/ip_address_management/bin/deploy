@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Exit on error and undefined variables
+set -euo pipefail
+
+# === Default Values ===
+DEFAULT_RESOURCE_GROUP="network-bootcamp"
+DEFAULT_LOCATION="canadacentral"
+DEFAULT_PARAMS_FILE="parameters.json"
+
+# === Usage Help ===
+usage() {
+  echo "Usage: $0 [--resource-group <name>] [--region <azure-region>] [--parameters-file <file>]"
+  echo ""
+  echo "Options:"
+  echo "  --resource-group    Azure Resource Group (default: $DEFAULT_RESOURCE_GROUP)"
+  echo "  --region            Azure Region (default: $DEFAULT_LOCATION)"
+  echo "  --parameters-file   JSON parameters file (default: $DEFAULT_PARAMS_FILE)"
+  exit 1
+}
+
+# === Parse Command Line Args ===
+RESOURCE_GROUP="$DEFAULT_RESOURCE_GROUP"
+LOCATION="$DEFAULT_LOCATION"
+PARAMS_FILE="$DEFAULT_PARAMS_FILE"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --resource-group)
+      RESOURCE_GROUP="$2"
+      shift 2
+      ;;
+    --region)
+      LOCATION="$2"
+      shift 2
+      ;;
+    --parameters-file)
+      PARAMS_FILE="$2"
+      shift 2
+      ;;
+    -*|--*)
+      usage
+      ;;
+  esac
+done
+
+# === Check Azure CLI login ===
+# Ref: https://learn.microsoft.com/en-us/cli/azure/account
+if ! az account show &>/dev/null; then
+  echo "🔒 Not logged into Azure CLI. Please run 'az login' first."
+  exit 1
+fi
+
+# === Check resource group existence, create if missing and location is provided ===
+# Ref: https://learn.microsoft.com/en-us/cli/azure/group
+if ! az group show --name "$RESOURCE_GROUP" &>/dev/null; then
+  if [[ -z "$LOCATION" ]]; then
+    echo "❌ Resource group $RESOURCE_GROUP does not exist and no location provided to create it."
+    exit 1
+  fi
+  echo "📦 Creating resource group $RESOURCE_GROUP in $LOCATION..."
+  az group create --name "$RESOURCE_GROUP" --location "$LOCATION"
+fi
+
+# === Prompt for admin password securely ===
+read -s -p "Enter adminPassword: " ADMIN_PASSWORD
+echo
+
+if [[ -z "$ADMIN_PASSWORD" ]]; then
+  echo "❌ Error: adminPassword cannot be empty."
+  exit 1
+fi
+
+# === Deploy ===
+echo "🚀 Starting deployment..."
+
+# Ref: https://learn.microsoft.com/en-us/cli/azure/deployment
+az deployment group create \
+  --resource-group "$RESOURCE_GROUP" \
+  --template-file template.bicep \
+  --parameters @"$PARAMS_FILE" \
+  --parameters adminPassword="$ADMIN_PASSWORD"
+
+echo -e "\n🎉 Deployment completed successfully."
+
+#eof#
