@@ -1,4 +1,4 @@
-# :mag_right: State of the Network (Packet Tracer)
+# :book: State of the Network (Packet Tracer) Journal
 
 After following along with Tim's _Cisco Packet Tracer_ video, I simulated a simple network that illustrates how basic _DHCP_ functions.
 
