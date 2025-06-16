@@ -248,6 +248,6 @@ This is an example of the _route_ command. We are getting the _route_ command to
 
 Since our connection to `camp.exampro.co` (IP 54.192.51.124) does not have a specific route for its network, we can tell from the route table that traffic destined for that domain would traverse the default gateway.
 
-The default gateway is `10.200.123.1` on the first NIC, and `10.200.123.129` on the second NIC. Since the NICs have the same metric (weighting) and are the same speed, the binding order of the NICs determines which interface is used. This means that unless the first NIC is unavailable (NIC is disabled, upstream connection goes down, etc.) that the traffic is sent to `10.200.123.1`.
+The default gateway is `10.200.123.1` on the first NIC, and `10.200.123.129` on the second NIC. Since the NICs have the same metric (weighting) and are the same speed, [the binding order of the NICs determines which interface is used](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/connectivity-issues-multiple-default-gateways). This means that unless the first NIC is unavailable (NIC is disabled, upstream connection goes down, etc.) that the traffic is sent to `10.200.123.1`.
 
 :end:
