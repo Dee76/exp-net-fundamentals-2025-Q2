@@ -10,5 +10,6 @@
   * :book: [Journal](/projects/ip_address_management/Journal.md)
 * :window: Windows Networking
   * :book: [Journal](/projects/windows_networking/Journal.md)
+* :bricks: [Windows Firewall Rules](/projects/windows_firewall_rules/README.md)
 
 :end:
