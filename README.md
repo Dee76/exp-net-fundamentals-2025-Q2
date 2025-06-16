@@ -11,5 +11,6 @@
 * :window: Windows Networking
   * :book: [Journal](/projects/windows_networking/Journal.md)
 * :bricks: [Windows Firewall Rules](/projects/windows_firewall_rules/README.md)
+  * :book: [Journal](/projects/windows_firewall_rules/Journal.md)
 
 :end:
