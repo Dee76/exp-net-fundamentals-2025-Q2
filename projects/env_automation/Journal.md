@@ -1,4 +1,4 @@
-# Environment Automation Journal
+# :rocket::book: Environment Automation Journal
 
 ## AWS VPC Automation
 

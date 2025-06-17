@@ -1,4 +1,4 @@
-# :book: Windows Networking Journal
+# :window::book: Windows Networking Journal
 
 ## Developer Environment
 

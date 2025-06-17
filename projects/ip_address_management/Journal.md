@@ -1,4 +1,4 @@
-# IP Address Management in Azure Journal
+# :mailbox_with_mail::book:IP Address Management in Azure Journal
 
 ## Downloaded Azure Resource Template
 

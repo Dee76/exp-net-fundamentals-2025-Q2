@@ -12,5 +12,7 @@
   * :book: [Journal](/projects/windows_networking/Journal.md)
 * :bricks: [Windows Firewall Rules](/projects/windows_firewall_rules/README.md)
   * :book: [Journal](/projects/windows_firewall_rules/Journal.md)
+* :penguin: Linux Networking
+  * :book: [Journal](/projects/linux_networking/Journal.md)
 
 :end:
