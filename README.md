@@ -1,6 +1,14 @@
 # exp-net-fundamentals-2025-Q2
 
-## Projects
+## Design Considerations
+
+![Architecture diagram of house wireless network](projects/diagramming/assets/house_wireless_architecture_diagram.png)
+
+The architecture diagram shows the wireless network of a three (3) story house, with outside yard.
+
+* :house::book: [Journal](projects/diagramming/Journal.md)
+
+## Projects & Journals
 
 * :rocket: [Environment Automation](projects/env_automation/README.md)
   * :book: [Journal](projects/env_automation/Journal.md)
