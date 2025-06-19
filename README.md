@@ -2,11 +2,11 @@
 
 ## Design Considerations
 
-![Architecture diagram of house wireless network](projects/diagramming/assets/house_wireless_architecture_diagram.png)
+![Architecture diagram of house wireless network](assets/house_wireless_architecture_diagram.png)
 
 The architecture diagram shows the wireless network of a three (3) story house, with outside yard.
 
-* :house::book: [Journal](projects/diagramming/Journal.md)
+* :house::book: [Journal](journal/week1/diagramming/Journal.md)
 
 ## Projects & Journals
 
