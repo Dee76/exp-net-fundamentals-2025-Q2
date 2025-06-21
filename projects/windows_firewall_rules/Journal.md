@@ -1,4 +1,4 @@
-# :bricks::book: Windows Firewall Rules Journal
+# :window::bricks::book: Windows Firewall Rules Journal
 
 ## Windows Defender Firewall Rules Testing Locally
 

@@ -18,9 +18,11 @@ The architecture diagram shows the wireless network of a three (3) story house, 
   * :book: [Journal](/projects/ip_address_management/Journal.md)
 * :window: Windows Networking
   * :book: [Journal](/projects/windows_networking/Journal.md)
-* :bricks: [Windows Firewall Rules](/projects/windows_firewall_rules/README.md)
+* :window::bricks: [Windows Firewall Rules](/projects/windows_firewall_rules/README.md)
   * :book: [Journal](/projects/windows_firewall_rules/Journal.md)
 * :penguin: Linux Networking
   * :book: [Journal](/projects/linux_networking/Journal.md)
+* :penguin::bricks: Linux Firewall Rules
+  * :book: [Journal](/projects/linux_firewall_rules/Journal.md)
 
 :end:

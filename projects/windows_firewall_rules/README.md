@@ -1,4 +1,4 @@
-# :bricks: Windows Firewall Rules
+# :window::bricks: Windows Firewall Rules
 
 ## Testing Windows Firewall Rules
 
